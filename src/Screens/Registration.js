@@ -6,17 +6,34 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-
 class Registration extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+    };
   }
-
+  handleName = (text) => {
+    this.setState({ name: text });
+  };
+  handleMail = (text) => {
+    this.setState({ mail: text });
+  };
+  handlePass = (text) => {
+    this.setState({ password: text });
+  };
+  handleLogin = () => {
+    alert(`Name : ${this.state.name} 
+Email : ${this.state.mail}
+Password : ${this.state.password} `);
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -70,7 +87,12 @@ class Registration extends Component {
             style={styles.icon}
           />
 
-          <TextInput style={styles.input} placeholder="Enter Your Name!" />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Your Name..."
+            maxLength={15}
+            onChangeText={this.handleName}
+          />
         </View>
         <View>
           <Text
@@ -96,7 +118,12 @@ class Registration extends Component {
         >
           <Entypo name="email" size={40} color="#FBC737" style={styles.icon} />
 
-          <TextInput style={styles.input} placeholder="Example123@gmail.com!" />
+          <TextInput
+            style={styles.input}
+            placeholder="Example123@gmail.com"
+            maxLength={20}
+            onChangeText={this.handleMail}
+          />
         </View>
         <View>
           <Text
@@ -126,10 +153,12 @@ class Registration extends Component {
             style={styles.input}
             secureTextEntry
             placeholder="***********"
+            maxLength={20}
+            onChangeText={this.handlePass}
           />
         </View>
         <View>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={this.handleLogin}>
             <Text style={{ color: "white", fontSize: 20 }}>Sign In</Text>
           </TouchableOpacity>
         </View>
@@ -148,6 +177,9 @@ class Registration extends Component {
               width: 120,
               height: 45,
               marginRight: 44,
+            }}
+            onPress={() => {
+              Linking.openURL("https://www.gmail.com");
             }}
           >
             <Text
@@ -168,6 +200,9 @@ class Registration extends Component {
               height: 45,
               width: 120,
             }}
+            onPress={() => {
+              Linking.openURL("https://www.facebook.com");
+            }}
           >
             <Text
               style={{
@@ -184,7 +219,14 @@ class Registration extends Component {
         <View style={{ flexDirection: "row", marginTop: 15 }}>
           <Text style={{ fontSize: 17 }}>Have a Account?</Text>
 
-          <Text style={{ color: "#FBC737", fontSize: 17 }}>Sign In</Text>
+          <Text
+            style={{ color: "#FBC737", fontSize: 17 }}
+            onPress={() => {
+              Linking.openURL("https://www.google.com");
+            }}
+          >
+            Sign In
+          </Text>
         </View>
         <View>
           <View style={styles.bubble3}></View>
